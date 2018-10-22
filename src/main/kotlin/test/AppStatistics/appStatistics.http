@@ -1,0 +1,9 @@
+### Get request that fetches all app statistics
+GET http://localhost:8080/app-statistics/all
+Content-Type: application/json
+
+### Get reequest that fetches report app statistics
+GET http://localhost:8080/app-statistics/report
+Content-Type: application/json
+
+###
