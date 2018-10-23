@@ -1,5 +1,6 @@
 package test.AppStatistics.Services
 
+import com.ibm.icu.util.PersianCalendar
 import test.AppStatistics.Models.AppStatisticsListResponse
 import test.AppStatistics.Models.AppStatisticsModel
 import test.AppStatistics.Repositories.AppStatisticsRepo
@@ -15,7 +16,7 @@ class AppStatisticsService(private val appStatisticsRepo: AppStatisticsRepo) {
 
         appStatisticsList
                 .forEach {
-                    val cal = Calendar.getInstance()
+                    val cal = PersianCalendar.getInstance()
                     cal.time = it.reportTime
                     val year = cal.get(Calendar.YEAR)
                     val week = cal.get(Calendar.WEEK_OF_YEAR)
