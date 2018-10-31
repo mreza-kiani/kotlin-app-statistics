@@ -1,13 +1,13 @@
-package test.AppStatistics.Controllers
+package test.appStatistics.controllers
 
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import test.AppStatistics.Models.AppStatistics
-import test.AppStatistics.Models.AppStatisticsListResponse
-import test.AppStatistics.Repositories.AppStatisticsRepo
-import test.AppStatistics.Services.AppStatisticsService
+import test.appStatistics.models.AppStatistics
+import test.appStatistics.models.AppStatisticsListResponse
+import test.appStatistics.repositories.AppStatisticsRepo
+import test.appStatistics.services.AppStatisticsService
 import java.util.*
 
 @RestController

@@ -1,4 +1,4 @@
-package test.AppStatistics
+package test.appStatistics
 
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -1,9 +1,9 @@
-package test.AppStatistics.Services
+package test.appStatistics.services
 
 import com.ibm.icu.util.PersianCalendar
-import test.AppStatistics.Models.AppStatisticsListResponse
-import test.AppStatistics.Models.AppStatisticsModel
-import test.AppStatistics.Repositories.AppStatisticsRepo
+import test.appStatistics.models.AppStatisticsListResponse
+import test.appStatistics.models.AppStatisticsModel
+import test.appStatistics.repositories.AppStatisticsRepo
 import java.util.*
 import java.util.Calendar
 

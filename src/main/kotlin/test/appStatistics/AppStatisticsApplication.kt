@@ -1,4 +1,4 @@
-package test.AppStatistics
+package test.appStatistics
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

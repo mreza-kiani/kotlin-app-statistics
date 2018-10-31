@@ -1,9 +1,9 @@
-package test.AppStatistics
+package test.appStatistics
 
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
-import test.AppStatistics.Models.AppStatistics
-import test.AppStatistics.Repositories.AppStatisticsRepo
+import test.appStatistics.models.AppStatistics
+import test.appStatistics.repositories.AppStatisticsRepo
 import java.util.*
 import java.util.GregorianCalendar
 
@@ -20,12 +20,12 @@ class DBSeeder(val appStatisticsRepo: AppStatisticsRepo) : CommandLineRunner{
             val appStatistics = makeRandomAppStatistics()
             appStatisticsList.add(appStatistics)
 
-            println("-- AppStatistics $appStatistics created!")
+            println("-- appStatistics $appStatistics created!")
         }
 
         this.appStatisticsRepo.saveAll(appStatisticsList)
 
-        println("-- AppStatistics list saved in database")
+        println("-- appStatistics list saved in database")
     }
 
     fun makeRandomAppStatistics(): AppStatistics {

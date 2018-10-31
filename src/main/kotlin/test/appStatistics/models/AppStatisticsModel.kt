@@ -1,4 +1,4 @@
-package test.AppStatistics.Models
+package test.appStatistics.models
 
 class AppStatisticsModel (val weekNum: Int, val year: Int) {
     fun addAppStatistics(appStatistics: AppStatistics) {

@@ -1,8 +1,8 @@
-package test.AppStatistics.Repositories
+package test.appStatistics.repositories
 
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
-import test.AppStatistics.Models.AppStatistics
+import test.appStatistics.models.AppStatistics
 import java.util.*
 
 @Repository
