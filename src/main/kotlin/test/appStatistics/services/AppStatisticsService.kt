@@ -1,38 +1,32 @@
 package test.appStatistics.services
 
-import com.ibm.icu.util.PersianCalendar
 import test.appStatistics.models.AppStatisticsListResponse
 import test.appStatistics.models.AppStatisticsModel
 import test.appStatistics.repositories.AppStatisticsRepo
+import test.appStatistics.utils.toPersianWeek
+import test.appStatistics.utils.toPersianYear
 import java.util.*
-import java.util.Calendar
 
 
 class AppStatisticsService(private val appStatisticsRepo: AppStatisticsRepo) {
 
     fun getStats(startDate: Date, endDate: Date, type: Int): AppStatisticsListResponse {
         val appStatisticsList = appStatisticsRepo.findByTypeAndReportTimeBetween(type, startDate, endDate)
-        val statisticsModels = mutableListOf<AppStatisticsModel>()
-
-        appStatisticsList
-                .forEach {
-                    val cal = PersianCalendar.getInstance()
-                    cal.time = it.reportTime
-                    val year = cal.get(Calendar.YEAR)
-                    val week = cal.get(Calendar.WEEK_OF_YEAR)
-
-                    val model: AppStatisticsModel
-                    model = try {
-                        statisticsModels.first { it.year == year && it.weekNum == week }
-                    } catch (e: NoSuchElementException) {
-                        AppStatisticsModel(week, year)
+        val statisticsModels = appStatisticsList
+                .groupingBy{ it.reportTime.toPersianWeek() }
+                .aggregate { week, accumulator: AppStatisticsModel?, element, isFirst ->
+                    if (isFirst) {
+                        val year = element.reportTime.toPersianYear()
+                        AppStatisticsModel(week, year).addAppStatistics(element)
                     }
-                    model.addAppStatistics(it)
-                    statisticsModels.add(model)
+                    else
+                        accumulator!!.addAppStatistics(element)
                 }
+                .values
+                .mapNotNull { it }
+                .sortedWith(compareBy({ it.year }, { it.weekNum }))
 
-        val sortedModels = statisticsModels.sortedWith(compareBy({ it.year }, { it.weekNum }))
-        return AppStatisticsListResponse(sortedModels)
+        return AppStatisticsListResponse(statisticsModels)
     }
 
 }
