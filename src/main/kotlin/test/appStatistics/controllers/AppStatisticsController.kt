@@ -17,7 +17,6 @@ class AppStatisticsController(val appStatisticsRepo: AppStatisticsRepo) {
     @GetMapping("/all")
     fun all(): MutableList<AppStatistics> = this.appStatisticsRepo.findAll()
 
-    @Cacheable(value = ["report"])
     @GetMapping("/report")
     fun query(): AppStatisticsListResponse {
         val type = (1..5).random()

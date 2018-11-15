@@ -1,5 +1,6 @@
 package test.appStatistics.services
 
+import org.springframework.cache.annotation.Cacheable
 import test.appStatistics.models.AppStatisticsListResponse
 import test.appStatistics.models.AppStatisticsModel
 import test.appStatistics.repositories.AppStatisticsRepo
@@ -8,9 +9,10 @@ import test.appStatistics.utils.toPersianYear
 import java.util.*
 
 
-class AppStatisticsService(private val appStatisticsRepo: AppStatisticsRepo) {
+open class AppStatisticsService(private val appStatisticsRepo: AppStatisticsRepo) {
 
-    fun getStats(startDate: Date, endDate: Date, type: Int): AppStatisticsListResponse {
+    @Cacheable(value=["app-statistics-report"], key="#startDate-#endDate-#type")
+    open fun getStats(startDate: Date, endDate: Date, type: Int): AppStatisticsListResponse {
         val appStatisticsList = appStatisticsRepo.findByTypeAndReportTimeBetween(type, startDate, endDate)
         val statisticsModels = appStatisticsList
                 .groupingBy{ it.reportTime.toPersianWeek() }

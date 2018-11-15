@@ -1,4 +1,6 @@
 package test.appStatistics.models
 
-class AppStatisticsListResponse(val stats: List<AppStatisticsModel>) {
+import java.io.Serializable
+
+class AppStatisticsListResponse(val stats: List<AppStatisticsModel>) : Serializable {
 }
