@@ -69,6 +69,13 @@
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.github.mfathi91/persian-date-time -->
+		<dependency>
+			<groupId>com.github.mfathi91</groupId>
+			<artifactId>persian-date-time</artifactId>
+			<version>4.0.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

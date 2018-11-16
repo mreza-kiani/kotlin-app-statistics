@@ -1,14 +1,14 @@
 package test.appStatistics.controllers
 
-import org.springframework.cache.annotation.Cacheable
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import test.appStatistics.models.AppStatistics
 import test.appStatistics.models.AppStatisticsListResponse
 import test.appStatistics.repositories.AppStatisticsRepo
 import test.appStatistics.services.AppStatisticsService
-import java.util.*
+import test.appStatistics.utils.toGregorian
 
 @RestController
 @RequestMapping("/app-statistics")
@@ -18,18 +18,14 @@ class AppStatisticsController(val appStatisticsRepo: AppStatisticsRepo) {
     fun all(): MutableList<AppStatistics> = this.appStatisticsRepo.findAll()
 
     @GetMapping("/report")
-    fun query(): AppStatisticsListResponse {
-        val type = (1..5).random()
-
-        val startCalendar = GregorianCalendar(2017, 1, 1)
-        val startDate = startCalendar.time
-
-        val endCalendar = GregorianCalendar(2018, 6, 28)
-        val endDate = endCalendar.time
-
+    fun query(@RequestBody request: ReportRequest): AppStatisticsListResponse {
         val appStatisticsService = AppStatisticsService(appStatisticsRepo)
-        return appStatisticsService.getStats(startDate, endDate, type)
+        return appStatisticsService.getStats(
+                request.startDate.toGregorian(),
+                request.endDate.toGregorian(),
+                request.type
+        )
     }
-
-    fun IntRange.random() = Random().nextInt((endInclusive + 1) - start) +  start
 }
+
+data class ReportRequest(val type: Int, val startDate: String, val endDate: String)

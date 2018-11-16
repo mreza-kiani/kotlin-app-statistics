@@ -6,4 +6,9 @@ Content-Type: application/json
 GET http://localhost:8080/app-statistics/report
 Content-Type: application/json
 
+{
+  "type": 1,
+  "startDate": "1397-01-01",
+  "endDate": "1397-11-29"
+}
 ###
